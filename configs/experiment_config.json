@@ -1,0 +1,78 @@
+{
+  "data": {
+    "generate": true,
+    "script": "generate_data.py",
+    "data_dir": "data/addition",
+    "n_train": 80000,
+    "n_val": 10000,
+    "n_test": 10000,
+    "seed": 42
+  },
+  "global_train": {
+    "epochs": 12,
+    "batch_size": 256,
+    "lr": 0.001,
+    "seed": 42,
+    "regen_data": false
+  },
+  "methods": [
+    {
+      "name": "ffnn",
+      "enabled": true,
+      "script": "train_ffnn_classifier.py",
+      "out_dir": "outputs/ffnn_classifier",
+      "overrides": {}
+    },
+    {
+      "name": "lstm_classifier",
+      "enabled": true,
+      "script": "train_lstm_classifier.py",
+      "out_dir": "outputs/lstm_classifier",
+      "overrides": {}
+    },
+    {
+      "name": "gru_classifier",
+      "enabled": true,
+      "script": "train_gru_classifier.py",
+      "out_dir": "outputs/gru_classifier",
+      "overrides": {}
+    },
+    {
+      "name": "lstm_multilabel",
+      "enabled": true,
+      "script": "train_lstm_multilabel.py",
+      "out_dir": "outputs/lstm_multilabel",
+      "overrides": {}
+    },
+    {
+      "name": "self_attention",
+      "enabled": true,
+      "script": "train_self_attention_classifier.py",
+      "out_dir": "outputs/self_attention_classifier",
+      "overrides": {}
+    },
+    {
+      "name": "lstm_seq2seq",
+      "enabled": true,
+      "script": "train_lstm_seq2seq.py",
+      "out_dir": "outputs/lstm_seq2seq",
+      "overrides": {
+        "epochs": 15
+      }
+    },
+    {
+      "name": "transformer_seq2seq",
+      "enabled": true,
+      "script": "train_transformer_seq2seq.py",
+      "out_dir": "outputs/transformer_seq2seq",
+      "overrides": {
+        "epochs": 15
+      }
+    }
+  ],
+  "comparison": {
+    "enabled": true,
+    "script": "compare_all_methods.py",
+    "out_dir": "outputs/comparison"
+  }
+}

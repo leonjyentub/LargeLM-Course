@@ -1,0 +1,15 @@
+[workspace]
+authors = ["leonjye <leonjye@ntub.edu.tw>"]
+channels = ["conda-forge"]
+name = "LargeLM-Course"
+platforms = ["osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+pytorch = ">=2.10.0,<3"
+numpy = ">=2.4.2,<3"
+scikit-learn = ">=1.8.0,<2"
+matplotlib = ">=3.10.8,<4"
+seaborn = ">=0.13.2,<0.14"
