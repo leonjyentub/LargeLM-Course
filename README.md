@@ -69,6 +69,17 @@ Comparison outputs:
 - `outputs/comparison/all_methods_metrics.csv`
 - `outputs/comparison/all_methods_comparison.png`
 
+## Visualize Model Architectures
+
+Generate one torchview JPG architecture graph for each PyTorch model:
+
+```bash
+pixi run visualize-models
+```
+
+Outputs:
+- `outputs/model_visualizations/*.jpg`
+
 ## Final Experiment Results
 
 Full experiment ranking:
