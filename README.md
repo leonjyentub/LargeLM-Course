@@ -7,8 +7,9 @@ No rule-based arithmetic is provided to the model.
 - Input: expression string such as `"100+20"`
 - Target:
   - Class A/C: single class id in `[0, 1999]`
+  - Regression: normalized scalar `sum / 1998`
   - Class B: 4-digit decomposition (`0-9` for each position)
-  - Class D: generated output sequence
+  - Class D: generated output sequence, left-to-right or right-to-left
 
 Generate dataset first:
 
@@ -22,8 +23,10 @@ python3 generate_data.py --data-dir data/addition --n-train 80000 --n-val 10000 
 3. `train_gru_classifier.py` (GRU encoder classifier)
 4. `train_lstm_multilabel.py` (LSTM multi-label digit classifier)
 5. `train_self_attention_classifier.py` (Self-attention classifier)
-6. `train_lstm_seq2seq.py` (LSTM Seq2Seq)
-7. `train_transformer_seq2seq.py` (Transformer Seq2Seq)
+6. `train_lstm_regression.py` (LSTM regression with MSE loss)
+7. `train_lstm_seq2seq.py` (LSTM Seq2Seq, left-to-right generation)
+8. `train_lstm_reverse_seq2seq.py` (LSTM Seq2Seq, right-to-left generation)
+9. `train_transformer_seq2seq.py` (Transformer Seq2Seq)
 
 Each script outputs to `outputs/<method>/`:
 - `train.log`
@@ -38,7 +41,7 @@ Fixed config files:
 - JSON: `configs/experiment_config.json`
 - YAML: `configs/experiment_config.yaml`
 
-Run all 7 methods + comparison using config:
+Run all configured methods + comparison using config:
 
 ```bash
 python3 run_all_experiments.py --config configs/experiment_config.json
@@ -73,6 +76,17 @@ Comparison outputs:
 - `common/plot_utils.py`: seaborn plotting helpers
 - `common/logging_utils.py`: unified logger
 - `common/run_helpers.py`: reusable loader/data preparation wrappers
+
+## Teaching Slides
+
+Editable course deck:
+
+```bash
+node slides/build_addition_course_deck.mjs
+```
+
+Output:
+- `slides/output/addition_nlp_course.pptx`
 
 ## Dependencies
 

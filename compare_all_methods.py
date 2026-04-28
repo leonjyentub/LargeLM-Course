@@ -15,9 +15,11 @@ METHODS = [
     ("ffnn", "train_ffnn_classifier.py", "outputs/ffnn_classifier/metrics.json"),
     ("lstm_cls", "train_lstm_classifier.py", "outputs/lstm_classifier/metrics.json"),
     ("gru_cls", "train_gru_classifier.py", "outputs/gru_classifier/metrics.json"),
+    ("lstm_regression", "train_lstm_regression.py", "outputs/lstm_regression/metrics.json"),
     ("lstm_multilabel", "train_lstm_multilabel.py", "outputs/lstm_multilabel/metrics.json"),
     ("self_attention", "train_self_attention_classifier.py", "outputs/self_attention_classifier/metrics.json"),
     ("lstm_seq2seq", "train_lstm_seq2seq.py", "outputs/lstm_seq2seq/metrics.json"),
+    ("lstm_reverse_seq2seq", "train_lstm_reverse_seq2seq.py", "outputs/lstm_reverse_seq2seq/metrics.json"),
     ("transformer_seq2seq", "train_transformer_seq2seq.py", "outputs/transformer_seq2seq/metrics.json"),
 ]
 
@@ -110,6 +112,8 @@ def print_rank(rows):
         summary = ", ".join(
             [f"{k}={float(r.get(k, float('nan'))):.4f}" for k in ["accuracy", "exact_match", "char_accuracy", "macro_f1", "auc"] if k in r]
         )
+        if "mae" in r:
+            summary = f"{summary}, mae={float(r['mae']):.2f}, rmse={float(r['rmse']):.2f}" if summary else f"mae={float(r['mae']):.2f}, rmse={float(r['rmse']):.2f}"
         print(f"{i:>2}. {r['method']}: {summary}")
 
 

@@ -53,6 +53,16 @@ def _compute_multilabel_metrics(y_true: np.ndarray, y_pred: np.ndarray) -> Dict[
     }
 
 
+def _normalize_answer(value: str) -> str:
+    return value.lstrip("0") or "0"
+
+
+def _prepare_seq_prediction(value: str, reverse_output: bool = False) -> str:
+    if reverse_output:
+        value = value[::-1]
+    return _normalize_answer(value)
+
+
 def _compute_sampled_multiclass_roc(
     y_true: np.ndarray,
     probs: np.ndarray,
@@ -259,6 +269,106 @@ def evaluate_classifier(
     return float(np.mean(losses)), metrics, probs_out, y_true
 
 
+def run_regression_training(
+    model: nn.Module,
+    train_loader: DataLoader,
+    val_loader: DataLoader,
+    test_loader: DataLoader,
+    out_dir: str | Path,
+    epochs: int = 10,
+    lr: float = 1e-3,
+    target_scale: float = 1998.0,
+    device: str | None = None,
+    logger=None,
+):
+    out_dir = Path(out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    device = device or ("cuda" if torch.cuda.is_available() else "cpu")
+    model.to(device)
+
+    optimizer = Adam(model.parameters(), lr=lr)
+    criterion = nn.MSELoss()
+    history = {"train_loss": [], "val_loss": [], "train_metric": [], "val_metric": []}
+    best_val = float("inf")
+    best_state = None
+
+    for epoch in range(1, epochs + 1):
+        model.train()
+        train_losses = []
+        for batch in train_loader:
+            x, y_scaled, _ = _to_device(batch, device)
+            optimizer.zero_grad()
+            pred_scaled = model(x)
+            loss = criterion(pred_scaled, y_scaled)
+            loss.backward()
+            optimizer.step()
+            train_losses.append(float(loss.item()))
+
+        val_loss, val_metrics = evaluate_regression(model, val_loader, device, target_scale=target_scale)
+        history["train_loss"].append(float(np.mean(train_losses)))
+        history["val_loss"].append(float(val_loss))
+        history["train_metric"].append(0.0)
+        history["val_metric"].append(float(val_metrics["mae"]))
+
+        if logger:
+            logger.info(
+                "Epoch %d/%d | train_loss=%.4f | val_loss=%.4f | val_mae=%.2f | val_exact=%.4f",
+                epoch,
+                epochs,
+                history["train_loss"][-1],
+                history["val_loss"][-1],
+                val_metrics["mae"],
+                val_metrics["exact_match"],
+            )
+
+        if val_metrics["mae"] < best_val:
+            best_val = val_metrics["mae"]
+            best_state = {k: v.cpu().clone() for k, v in model.state_dict().items()}
+
+    if best_state is not None:
+        model.load_state_dict(best_state)
+
+    test_loss, test_metrics = evaluate_regression(model, test_loader, device, target_scale=target_scale)
+    plot_training_curves(history, out_dir / "training_curves.png", title="regression")
+    result = {"task_type": "regression", "test_loss": float(test_loss), **test_metrics}
+
+    with open(out_dir / "metrics.json", "w", encoding="utf-8") as f:
+        json.dump(result, f, indent=2)
+
+    torch.save(model.state_dict(), out_dir / "best_model.pt")
+    return result, history
+
+
+def evaluate_regression(model: nn.Module, loader: DataLoader, device: str, target_scale: float = 1998.0):
+    model.eval()
+    criterion = nn.MSELoss()
+    losses = []
+    preds = []
+    targets = []
+
+    with torch.no_grad():
+        for batch in loader:
+            x, y_scaled, raw_y = _to_device(batch, device)
+            pred_scaled = model(x)
+            loss = criterion(pred_scaled, y_scaled)
+            losses.append(float(loss.item()))
+
+            pred_raw = torch.round(pred_scaled * target_scale).clamp(0, target_scale).long()
+            preds.append(pred_raw.detach().cpu().numpy())
+            targets.append(raw_y.detach().cpu().numpy())
+
+    y_pred = np.concatenate(preds, axis=0)
+    y_true = np.concatenate(targets, axis=0)
+    errors = y_pred.astype(float) - y_true.astype(float)
+    metrics = {
+        "exact_match": float((y_pred == y_true).mean()),
+        "mae": float(np.abs(errors).mean()),
+        "rmse": float(np.sqrt(np.square(errors).mean())),
+    }
+    return float(np.mean(losses)), metrics
+
+
 def run_seq2seq_training(
     model: nn.Module,
     train_loader: DataLoader,
@@ -268,6 +378,7 @@ def run_seq2seq_training(
     epochs: int = 10,
     lr: float = 1e-3,
     device: str | None = None,
+    reverse_output: bool = False,
     logger=None,
 ):
     out_dir = Path(out_dir)
@@ -299,11 +410,11 @@ def run_seq2seq_training(
 
             train_losses.append(float(loss.item()))
             pred_ids = logits.argmax(dim=-1).detach().cpu().numpy().tolist()
-            train_preds.extend([decode_seq(ids) for ids in pred_ids])
-            train_tgts.extend([str(x).lstrip("0") or "0" for x in raw_targets])
+            train_preds.extend([_prepare_seq_prediction(decode_seq(ids), reverse_output) for ids in pred_ids])
+            train_tgts.extend([_normalize_answer(str(x)) for x in raw_targets])
 
         train_exact = np.mean([p == t for p, t in zip(train_preds, train_tgts)])
-        val_loss, val_metrics = evaluate_seq2seq(model, val_loader, device)
+        val_loss, val_metrics = evaluate_seq2seq(model, val_loader, device, reverse_output=reverse_output)
 
         history["train_loss"].append(float(np.mean(train_losses)))
         history["val_loss"].append(float(val_loss))
@@ -328,7 +439,7 @@ def run_seq2seq_training(
     if best_state is not None:
         model.load_state_dict(best_state)
 
-    test_loss, test_metrics = evaluate_seq2seq(model, test_loader, device)
+    test_loss, test_metrics = evaluate_seq2seq(model, test_loader, device, reverse_output=reverse_output)
 
     plot_training_curves(history, out_dir / "training_curves.png", title="seq2seq")
     result = {"task_type": "seq2seq", "test_loss": float(test_loss), **test_metrics}
@@ -340,7 +451,7 @@ def run_seq2seq_training(
     return result, history
 
 
-def evaluate_seq2seq(model: nn.Module, loader: DataLoader, device: str):
+def evaluate_seq2seq(model: nn.Module, loader: DataLoader, device: str, reverse_output: bool = False):
     model.eval()
     criterion = nn.CrossEntropyLoss(ignore_index=0)
 
@@ -359,8 +470,8 @@ def evaluate_seq2seq(model: nn.Module, loader: DataLoader, device: str):
             losses.append(float(loss.item()))
 
             pred_ids = model.greedy_decode(src, sos_id=sos, eos_id=eos, max_len=tgt_out.size(1)).cpu().numpy().tolist()
-            pred_strs = [decode_seq(ids) for ids in pred_ids]
-            tgt_strs = [str(x).lstrip("0") or "0" for x in raw_targets]
+            pred_strs = [_prepare_seq_prediction(decode_seq(ids), reverse_output) for ids in pred_ids]
+            tgt_strs = [_normalize_answer(str(x)) for x in raw_targets]
 
             for p, t in zip(pred_strs, tgt_strs):
                 exact_flags.append(1.0 if p == t else 0.0)

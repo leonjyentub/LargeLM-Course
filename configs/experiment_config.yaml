@@ -33,6 +33,12 @@ methods:
     out_dir: outputs/gru_classifier
     overrides: {}
 
+  - name: lstm_regression
+    enabled: true
+    script: train_lstm_regression.py
+    out_dir: outputs/lstm_regression
+    overrides: {}
+
   - name: lstm_multilabel
     enabled: true
     script: train_lstm_multilabel.py
@@ -49,6 +55,13 @@ methods:
     enabled: true
     script: train_lstm_seq2seq.py
     out_dir: outputs/lstm_seq2seq
+    overrides:
+      epochs: 15
+
+  - name: lstm_reverse_seq2seq
+    enabled: true
+    script: train_lstm_reverse_seq2seq.py
+    out_dir: outputs/lstm_reverse_seq2seq
     overrides:
       epochs: 15
 

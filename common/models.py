@@ -63,6 +63,24 @@ class GRUClassifier(nn.Module):
         return self.fc(h_n[-1])
 
 
+class LSTMRegressor(nn.Module):
+    def __init__(self, vocab_size: int, emb_dim: int = 48, hidden_dim: int = 128):
+        super().__init__()
+        self.embedding = nn.Embedding(vocab_size, emb_dim, padding_idx=0)
+        self.lstm = nn.LSTM(emb_dim, hidden_dim, batch_first=True)
+        self.fc = nn.Sequential(
+            nn.Linear(hidden_dim, hidden_dim // 2),
+            nn.ReLU(),
+            nn.Linear(hidden_dim // 2, 1),
+            nn.Sigmoid(),
+        )
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        emb = self.embedding(x)
+        _, (h_n, _) = self.lstm(emb)
+        return self.fc(h_n[-1]).squeeze(-1)
+
+
 class LSTMMultiLabelClassifier(nn.Module):
     def __init__(self, vocab_size: int, emb_dim: int = 48, hidden_dim: int = 128, positions: int = 4, n_digits: int = 10):
         super().__init__()
@@ -150,6 +168,10 @@ class LSTMSeq2Seq(nn.Module):
             cur = torch.cat([cur, nxt], dim=1)
 
         return torch.cat(outputs, dim=1)
+
+
+class LSTMReverseSeq2Seq(LSTMSeq2Seq):
+    """Same architecture as LSTMSeq2Seq, trained to emit least-significant digits first."""
 
 
 class TransformerSeq2Seq(nn.Module):

@@ -61,7 +61,7 @@ def build_train_cmd(method_cfg: Dict[str, Any], global_cfg: Dict[str, Any], data
 
 
 def main():
-    parser = argparse.ArgumentParser(description="One-click runner for all 7 NLP addition experiments.")
+    parser = argparse.ArgumentParser(description="One-click runner for configured NLP addition experiments.")
     parser.add_argument("--config", type=str, default="configs/experiment_config.json")
     parser.add_argument("--dry-run", action="store_true", help="Only print commands without executing.")
     args = parser.parse_args()

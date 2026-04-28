@@ -5,6 +5,7 @@ from pathlib import Path
 from .data_utils import (
     AdditionClassificationDataset,
     AdditionMultiLabelDataset,
+    AdditionRegressionDataset,
     AdditionSeq2SeqDataset,
     INPUT_VOCAB,
     OUTPUT_VOCAB,
@@ -37,6 +38,17 @@ def build_classification_loaders(train_df, val_df, test_df, batch_size=256):
     )
 
 
+def build_regression_loaders(train_df, val_df, test_df, batch_size=256):
+    train_ds = AdditionRegressionDataset(train_df)
+    val_ds = AdditionRegressionDataset(val_df)
+    test_ds = AdditionRegressionDataset(test_df)
+    return (
+        build_dataloader(train_ds, batch_size=batch_size, shuffle=True),
+        build_dataloader(val_ds, batch_size=batch_size, shuffle=False),
+        build_dataloader(test_ds, batch_size=batch_size, shuffle=False),
+    )
+
+
 def build_multilabel_loaders(train_df, val_df, test_df, batch_size=256):
     train_ds = AdditionMultiLabelDataset(train_df)
     val_ds = AdditionMultiLabelDataset(val_df)
@@ -48,10 +60,10 @@ def build_multilabel_loaders(train_df, val_df, test_df, batch_size=256):
     )
 
 
-def build_seq2seq_loaders(train_df, val_df, test_df, batch_size=256):
-    train_ds = AdditionSeq2SeqDataset(train_df)
-    val_ds = AdditionSeq2SeqDataset(val_df)
-    test_ds = AdditionSeq2SeqDataset(test_df)
+def build_seq2seq_loaders(train_df, val_df, test_df, batch_size=256, reverse: bool = False):
+    train_ds = AdditionSeq2SeqDataset(train_df, reverse=reverse)
+    val_ds = AdditionSeq2SeqDataset(val_df, reverse=reverse)
+    test_ds = AdditionSeq2SeqDataset(test_df, reverse=reverse)
     return (
         build_dataloader(train_ds, batch_size=batch_size, shuffle=True),
         build_dataloader(val_ds, batch_size=batch_size, shuffle=False),

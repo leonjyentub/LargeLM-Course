@@ -122,8 +122,10 @@ def encode_multilabel_target(total: int) -> List[int]:
     return [int(ch) for ch in f"{total:04d}"]
 
 
-def encode_seq_target(total: int) -> Tuple[List[int], List[int]]:
+def encode_seq_target(total: int, reverse: bool = False) -> Tuple[List[int], List[int]]:
     digits = list(f"{total:04d}")
+    if reverse:
+        digits = list(reversed(digits))
     dec_in = [OUTPUT_VOCAB["<sos>"]] + [OUTPUT_VOCAB[d] for d in digits]
     dec_out = [OUTPUT_VOCAB[d] for d in digits] + [OUTPUT_VOCAB["<eos>"]]
     return dec_in, dec_out
@@ -159,6 +161,24 @@ class AdditionClassificationDataset(Dataset):
         return torch.tensor(self.x[idx], dtype=torch.long), torch.tensor(self.y[idx], dtype=torch.long)
 
 
+class AdditionRegressionDataset(Dataset):
+    def __init__(self, samples: Sequence[Tuple[str, int]], target_scale: float = 1998.0):
+        _require_torch()
+        self.x = [encode_input(expr) for expr, _ in samples]
+        self.y = [float(v) / target_scale for _, v in samples]
+        self.raw_y = [int(v) for _, v in samples]
+
+    def __len__(self) -> int:
+        return len(self.y)
+
+    def __getitem__(self, idx: int):
+        return (
+            torch.tensor(self.x[idx], dtype=torch.long),
+            torch.tensor(self.y[idx], dtype=torch.float32),
+            torch.tensor(self.raw_y[idx], dtype=torch.long),
+        )
+
+
 class AdditionMultiLabelDataset(Dataset):
     def __init__(self, samples: Sequence[Tuple[str, int]]):
         _require_torch()
@@ -173,10 +193,10 @@ class AdditionMultiLabelDataset(Dataset):
 
 
 class AdditionSeq2SeqDataset(Dataset):
-    def __init__(self, samples: Sequence[Tuple[str, int]]):
+    def __init__(self, samples: Sequence[Tuple[str, int]], reverse: bool = False):
         _require_torch()
         self.src = [encode_input(expr) for expr, _ in samples]
-        encoded = [encode_seq_target(v) for _, v in samples]
+        encoded = [encode_seq_target(v, reverse=reverse) for _, v in samples]
         self.tgt_in = [x[0] for x in encoded]
         self.tgt_out = [x[1] for x in encoded]
         self.raw_targets = [f"{v:04d}" for _, v in samples]
