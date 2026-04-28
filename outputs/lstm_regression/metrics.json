@@ -1,0 +1,7 @@
+{
+  "task_type": "regression",
+  "test_loss": 1.2266246130820946e-05,
+  "exact_match": 0.0615,
+  "mae": 5.273,
+  "rmse": 7.038849337782419
+}
