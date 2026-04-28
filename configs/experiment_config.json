@@ -18,35 +18,35 @@
   "methods": [
     {
       "name": "ffnn",
-      "enabled": true,
+      "enabled": false,
       "script": "train_ffnn_classifier.py",
       "out_dir": "outputs/ffnn_classifier",
       "overrides": {}
     },
     {
       "name": "lstm_classifier",
-      "enabled": true,
+      "enabled": false,
       "script": "train_lstm_classifier.py",
       "out_dir": "outputs/lstm_classifier",
       "overrides": {}
     },
     {
       "name": "gru_classifier",
-      "enabled": true,
+      "enabled": false,
       "script": "train_gru_classifier.py",
       "out_dir": "outputs/gru_classifier",
       "overrides": {}
     },
     {
       "name": "lstm_regression",
-      "enabled": true,
+      "enabled": false,
       "script": "train_lstm_regression.py",
       "out_dir": "outputs/lstm_regression",
       "overrides": {}
     },
     {
       "name": "lstm_multilabel",
-      "enabled": true,
+      "enabled": false,
       "script": "train_lstm_multilabel.py",
       "out_dir": "outputs/lstm_multilabel",
       "overrides": {}
