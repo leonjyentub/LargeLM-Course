@@ -1,0 +1,12 @@
+2026-04-28 19:14:20,074 | INFO | Epoch 1/12 | train_loss=6.9993 | val_loss=6.2464 | train_accuracy=0.0030 | val_accuracy=0.0064
+2026-04-28 19:14:22,297 | INFO | Epoch 2/12 | train_loss=5.8155 | val_loss=5.5246 | train_accuracy=0.0114 | val_accuracy=0.0114
+2026-04-28 19:14:24,389 | INFO | Epoch 3/12 | train_loss=5.2207 | val_loss=5.0370 | train_accuracy=0.0203 | val_accuracy=0.0251
+2026-04-28 19:14:30,010 | INFO | Epoch 4/12 | train_loss=4.8556 | val_loss=4.7647 | train_accuracy=0.0294 | val_accuracy=0.0310
+2026-04-28 19:14:32,022 | INFO | Epoch 5/12 | train_loss=4.6065 | val_loss=4.5952 | train_accuracy=0.0370 | val_accuracy=0.0308
+2026-04-28 19:14:34,117 | INFO | Epoch 6/12 | train_loss=4.4140 | val_loss=4.4260 | train_accuracy=0.0456 | val_accuracy=0.0387
+2026-04-28 19:14:36,301 | INFO | Epoch 7/12 | train_loss=4.2611 | val_loss=4.2872 | train_accuracy=0.0507 | val_accuracy=0.0427
+2026-04-28 19:14:38,430 | INFO | Epoch 8/12 | train_loss=4.1406 | val_loss=4.1699 | train_accuracy=0.0580 | val_accuracy=0.0487
+2026-04-28 19:14:40,452 | INFO | Epoch 9/12 | train_loss=4.0243 | val_loss=4.0860 | train_accuracy=0.0648 | val_accuracy=0.0504
+2026-04-28 19:14:42,522 | INFO | Epoch 10/12 | train_loss=3.9331 | val_loss=4.0158 | train_accuracy=0.0687 | val_accuracy=0.0526
+2026-04-28 19:14:44,782 | INFO | Epoch 11/12 | train_loss=3.8567 | val_loss=3.9579 | train_accuracy=0.0724 | val_accuracy=0.0529
+2026-04-28 19:14:46,853 | INFO | Epoch 12/12 | train_loss=3.7816 | val_loss=3.9174 | train_accuracy=0.0793 | val_accuracy=0.0500

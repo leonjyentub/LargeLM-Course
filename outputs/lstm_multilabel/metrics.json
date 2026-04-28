@@ -1,0 +1,6 @@
+{
+  "task_type": "multilabel",
+  "test_loss": 4.7619969010353085,
+  "exact_match": 0.0195,
+  "digit_accuracy": 0.542275
+}

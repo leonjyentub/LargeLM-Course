@@ -1,0 +1,12 @@
+2026-04-28 19:15:33,668 | INFO | Epoch 1/12 | train_loss=7.0203 | val_loss=6.1616 | train_exact_match=0.0024 | val_exact_match=0.0065
+2026-04-28 19:15:34,974 | INFO | Epoch 2/12 | train_loss=5.8605 | val_loss=5.5999 | train_exact_match=0.0066 | val_exact_match=0.0061
+2026-04-28 19:15:36,211 | INFO | Epoch 3/12 | train_loss=5.4608 | val_loss=5.3366 | train_exact_match=0.0077 | val_exact_match=0.0076
+2026-04-28 19:15:37,433 | INFO | Epoch 4/12 | train_loss=5.2340 | val_loss=5.1387 | train_exact_match=0.0083 | val_exact_match=0.0086
+2026-04-28 19:15:42,320 | INFO | Epoch 5/12 | train_loss=5.0960 | val_loss=5.0376 | train_exact_match=0.0093 | val_exact_match=0.0110
+2026-04-28 19:15:43,571 | INFO | Epoch 6/12 | train_loss=5.0175 | val_loss=5.0133 | train_exact_match=0.0095 | val_exact_match=0.0099
+2026-04-28 19:15:44,980 | INFO | Epoch 7/12 | train_loss=4.9470 | val_loss=5.0432 | train_exact_match=0.0107 | val_exact_match=0.0114
+2026-04-28 19:15:46,330 | INFO | Epoch 8/12 | train_loss=4.9055 | val_loss=4.8903 | train_exact_match=0.0113 | val_exact_match=0.0099
+2026-04-28 19:15:47,589 | INFO | Epoch 9/12 | train_loss=4.8695 | val_loss=4.8430 | train_exact_match=0.0121 | val_exact_match=0.0130
+2026-04-28 19:15:48,810 | INFO | Epoch 10/12 | train_loss=4.8240 | val_loss=4.8192 | train_exact_match=0.0144 | val_exact_match=0.0150
+2026-04-28 19:15:50,035 | INFO | Epoch 11/12 | train_loss=4.7505 | val_loss=4.7678 | train_exact_match=0.0175 | val_exact_match=0.0183
+2026-04-28 19:15:51,370 | INFO | Epoch 12/12 | train_loss=4.6960 | val_loss=4.6950 | train_exact_match=0.0194 | val_exact_match=0.0151
