@@ -10,3 +10,5 @@
 2026-02-07 15:24:57,112 | INFO | Epoch 10/12 | train_loss=1.7189 | val_loss=2.0967 | train_accuracy=0.5435 | val_accuracy=0.5249
 2026-02-07 15:24:58,541 | INFO | Epoch 11/12 | train_loss=1.5656 | val_loss=1.9824 | train_accuracy=0.5796 | val_accuracy=0.5520
 2026-02-07 15:24:59,985 | INFO | Epoch 12/12 | train_loss=1.4426 | val_loss=1.8870 | train_accuracy=0.6090 | val_accuracy=0.5862
+2026-03-25 11:12:24,114 | INFO | Epoch 1/12 | train_loss=7.1874 | val_loss=6.7217 | train_accuracy=0.0016 | val_accuracy=0.0033
+2026-03-25 11:12:25,589 | INFO | Epoch 2/12 | train_loss=6.3044 | val_loss=5.8796 | train_accuracy=0.0087 | val_accuracy=0.0154
