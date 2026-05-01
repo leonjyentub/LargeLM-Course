@@ -69,6 +69,39 @@ Comparison outputs:
 - `outputs/comparison/all_methods_metrics.csv`
 - `outputs/comparison/all_methods_comparison.png`
 
+## Visualize Model Architectures
+
+Generate one torchview JPG architecture graph for each PyTorch model:
+
+```bash
+pixi run visualize-models
+```
+
+Outputs:
+- `outputs/model_visualizations/*.jpg`
+
+## Final Experiment Results
+
+Full experiment ranking:
+
+| Rank | Method | Main results |
+|---:|---|---|
+| 1 | `ffnn` | accuracy=0.5516, macro_f1=0.4502, auc=0.9938 |
+| 2 | `gru_cls` | accuracy=0.0565, macro_f1=0.0217, auc=0.9655 |
+| 3 | `lstm_cls` | accuracy=0.0449, macro_f1=0.0160, auc=0.9602 |
+| 4 | `self_attention` | accuracy=0.0158, macro_f1=0.0050, auc=0.9076 |
+| 5 | `lstm_reverse_seq2seq` | exact_match=0.9025, char_accuracy=0.9700 |
+| 6 | `transformer_seq2seq` | exact_match=0.8930, char_accuracy=0.9610 |
+| 7 | `lstm_seq2seq` | exact_match=0.1356, char_accuracy=0.6751 |
+| 8 | `lstm_regression` | exact_match=0.0615, mae=5.27, rmse=7.04 |
+| 9 | `lstm_multilabel` | exact_match=0.0195 |
+
+Teaching notes:
+- Multiclass methods are ranked by classification metrics (`accuracy`, `macro_f1`, sampled multiclass `auc`).
+- Seq2Seq methods are ranked by full-answer `exact_match` and per-character `char_accuracy`.
+- Regression reports rounded-answer `exact_match` plus numeric error (`mae`, `rmse`).
+- The right-to-left LSTM Seq2Seq result is a useful classroom contrast: generating the least-significant digit first aligns better with addition carry direction than the left-to-right LSTM Seq2Seq baseline.
+
 ## Shared Modules
 - `common/data_utils.py`: dataset generation, encoding, Dataset classes
 - `common/models.py`: all model architectures

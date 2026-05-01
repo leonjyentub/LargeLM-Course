@@ -1,0 +1,12 @@
+2026-04-28 19:14:54,820 | INFO | Epoch 1/12 | train_loss=0.0051 | val_loss=0.0006 | val_mae=30.89 | val_exact=0.0124
+2026-04-28 19:14:57,975 | INFO | Epoch 2/12 | train_loss=0.0004 | val_loss=0.0004 | val_mae=29.88 | val_exact=0.0049
+2026-04-28 19:15:01,779 | INFO | Epoch 3/12 | train_loss=0.0002 | val_loss=0.0001 | val_mae=17.47 | val_exact=0.0115
+2026-04-28 19:15:08,348 | INFO | Epoch 4/12 | train_loss=0.0001 | val_loss=0.0001 | val_mae=20.42 | val_exact=0.0053
+2026-04-28 19:15:11,236 | INFO | Epoch 5/12 | train_loss=0.0000 | val_loss=0.0001 | val_mae=15.42 | val_exact=0.0063
+2026-04-28 19:15:13,741 | INFO | Epoch 6/12 | train_loss=0.0000 | val_loss=0.0000 | val_mae=11.25 | val_exact=0.0255
+2026-04-28 19:15:16,515 | INFO | Epoch 7/12 | train_loss=0.0000 | val_loss=0.0000 | val_mae=5.27 | val_exact=0.0619
+2026-04-28 19:15:19,135 | INFO | Epoch 8/12 | train_loss=0.0000 | val_loss=0.0001 | val_mae=14.06 | val_exact=0.0065
+2026-04-28 19:15:21,767 | INFO | Epoch 9/12 | train_loss=0.0000 | val_loss=0.0000 | val_mae=9.18 | val_exact=0.0182
+2026-04-28 19:15:24,608 | INFO | Epoch 10/12 | train_loss=0.0000 | val_loss=0.0000 | val_mae=6.17 | val_exact=0.0457
+2026-04-28 19:15:27,094 | INFO | Epoch 11/12 | train_loss=0.0000 | val_loss=0.0000 | val_mae=5.63 | val_exact=0.0543
+2026-04-28 19:15:29,682 | INFO | Epoch 12/12 | train_loss=0.0000 | val_loss=0.0000 | val_mae=6.64 | val_exact=0.0338

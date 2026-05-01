@@ -6,6 +6,7 @@ platforms = ["osx-arm64", "linux-64", "win-64"]
 version = "0.1.0"
 
 [tasks]
+visualize-models = "python visualize_model_architectures.py"
 
 [dependencies]
 pytorch = ">=2.10.0,<3"
@@ -13,3 +14,8 @@ numpy = ">=2.4.2,<3"
 scikit-learn = ">=1.8.0,<2"
 matplotlib = ">=3.10.8,<4"
 seaborn = ">=0.13.2,<0.14"
+graphviz = ">=14.1.2,<15"
+python-graphviz = ">=0.21,<0.22"
+
+[pypi-dependencies]
+torchview = ">=0.2.7, <0.3"
