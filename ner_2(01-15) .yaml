@@ -1,0 +1,122 @@
+stage: "階段二：序列標註與資料格式"
+
+slides:
+
+  - id: 1
+    title: "第二階段：序列標註與資料格式"
+    content:
+      - "核心任務：將 NER 問題轉換為可計算的標籤序列"
+      - "理解 Sequence Labeling 的建模方式"
+      - "掌握 BIO / BIOES 標註格式"
+      - "了解資料預處理流程"
+    image_prompt: "minimalist academic slide showing text transforming into labeled sequence"
+
+  - id: 2
+    title: "為什麼 NER 是序列標註問題？"
+    content:
+      - "分類任務：一筆資料 → 一個標籤"
+      - "NER：每個 Token 對應一個標籤"
+      - "標籤之間具有序列依賴（sequence dependency）"
+    image_prompt: "comparison of classification vs sequence labeling diagram"
+
+  - id: 3
+    title: "NER 的分類本質"
+    content:
+      - "為每個 Token 預測類別標籤"
+      - "標籤包含：實體類型 + 邊界資訊"
+      - "例如：B-ORG 表示組織開頭"
+    image_prompt: "sequence tagging neural network visualization"
+
+  - id: 4
+    title: "案例：歷史文本標註"
+    content:
+      - "文本：明朝建立於14世紀，開國皇帝是朱元璋"
+      - "實體：明朝(ORG)、14世紀(TIME)、朱元璋(PER)"
+      - "關鍵問題：如何標記邊界"
+    image_prompt: "highlighted historical entities in sentence"
+
+  - id: 5
+    title: "BIO 標註體系"
+    content:
+      - "B (Begin)：實體開始"
+      - "I (Inside)：實體內部"
+      - "O (Outside)：非實體"
+    image_prompt: "BIO blocks diagram"
+
+  - id: 6
+    title: "BIO 範例：組織"
+    content:
+      - "明 朝"
+      - "B-ORG I-ORG"
+    image_prompt: "Chinese entity tagging example"
+
+  - id: 7
+    title: "BIO 範例：時間與人物"
+    content:
+      - "14 世 紀 → B-TIME I-TIME I-TIME"
+      - "朱 元 璋 → B-PER I-PER I-PER"
+      - "數字 + 單位通常視為同一實體"
+    image_prompt: "token-label table"
+
+  - id: 8
+    title: "標註一致性規則"
+    content:
+      - "非實體 → O"
+      - "I 必須接在 B 或 I 之後"
+      - "非法序列：O → I"
+      - "這些限制會影響模型設計（如 CRF）"
+    image_prompt: "valid vs invalid tagging sequences"
+
+  - id: 9
+    title: "標註格式的重要性"
+    content:
+      - "決定實體邊界學習能力"
+      - "避免相鄰實體混淆"
+      - "是訓練模型的基礎資料結構"
+    image_prompt: "structured tagging system visualization"
+
+  - id: 10
+    title: "BIOES 標註"
+    content:
+      - "E (End)：結尾"
+      - "S (Single)：單字實體"
+      - "提供更完整邊界資訊"
+    image_prompt: "BIOES diagram"
+
+  - id: 11
+    title: "BIO vs BIOES"
+    content:
+      - "中國 → BIO: B I / BIOES: B E"
+      - "人 → BIO: B / BIOES: S"
+    image_prompt: "comparison table"
+
+  - id: 12
+    title: "BMES 格式"
+    content:
+      - "B M E S"
+      - "常用於中文分詞"
+      - "與 BIOES 類似"
+    image_prompt: "BMES tagging diagram"
+
+  - id: 13
+    title: "如何選擇標註格式？"
+    content:
+      - "長實體、多資料：BIOES"
+      - "簡單模型：BIO"
+      - "訓練與推論需一致"
+    image_prompt: "decision tree"
+
+  - id: 14
+    title: "資料預處理流程"
+    content:
+      - "文本 → Token → ID → Tensor"
+      - "步驟：tokenization → vocab → encoding → padding"
+    image_prompt: "pipeline diagram"
+
+  - id: 15
+    title: "Tokenization"
+    content:
+      - "Token 不一定是字"
+      - "中文：char-level 或 word-level"
+      - "現代模型：subword（BPE / WordPiece）"
+    image_prompt: "token splitting visualization"
