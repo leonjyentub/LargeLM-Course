@@ -282,7 +282,7 @@ def train_crf_demo(epochs: int = 60, lr: float = 0.2, seed: int = 7) -> None:
 		["John", "visited", "Seattle"],
 		["OpenAI", "is", "in", "New", "York"],
 		#長一點的範例
-		["Alice", "visited", "San", "Francisco", "and", "then", "went", "to", "Seattle"],
+		["Alice", "visited", "San", "Francisco", "and", "then", "went", "to", "San", "Diego"],
 	]
 
 	vocab = build_vocab(train_sentences + test_sentences)
