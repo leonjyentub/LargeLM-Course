@@ -1,0 +1,119 @@
+階段三: 技術演進與實戰策略 (50分鐘)
+
+slides:
+  - slide_1:
+      標題: 第三階段：技術演進與實戰策略
+      內容:
+        - 核心任務：了解 NER 技術從統計模型到深度學習的演變。
+        - 學習重點：
+            - [cite_start]掌握 HMM 與 CRF 的基本原理。 [cite: 2]
+            - [cite_start]解析 BiLSTM-CRF 架構及其優勢。 [cite: 2]
+            - [cite_start]了解 BERT 在實務中的應用。 [cite: 2]
+      圖片生成提示詞: "A professional title slide with a visual timeline moving from classic statistical symbols to a modern brain-like neural network icon."
+
+  - slide_2:
+      標題: NER 技術發展簡史
+      內容:
+        - [cite_start]1990s - 2000s：基於規則與統計模型 (HMM, CRF)。 [cite: 2]
+        - [cite_start]2010s：深度學習崛起 (RNN, LSTM-CRF)。 [cite: 2]
+        - [cite_start]2018 至今：預訓練模型時代 (BERT, RoBERTa)。 [cite: 2]
+      圖片生成提示詞: "A clear horizontal timeline graphic with three distinct era markers: Statistical, Neural, and Pre-trained."
+
+  - slide_3:
+      標題: 傳統統計方法：隱馬爾可夫模型 (HMM)
+      內容:
+        - 核心思想：將標籤視為「隱藏狀態」，文字為「觀測值」。
+        - 二元關係：$P(詞|標籤)$ 與 $P(標籤|前一個標籤)$。
+        - [cite_start]缺點：難以捕捉長距離的上下文資訊。 [cite: 2]
+      圖片生成提示詞: "A diagram showing hidden states (tags) connected to observed states (words) with arrows representing probability."
+
+  - slide_4:
+      標題: 為什麼需要條件隨機場 (CRF)？
+      內容:
+        - [cite_start]CRF 是 NER 的經典算法，也是目前許多模型的最後一層。 [cite: 2]
+        - 特點：它不只看單個字的分類，而是計算整個「標籤序列」的機率。
+        - [cite_start]關鍵優勢：能學習到標籤間的約束規則（如 I 不接在 O 後面）。 [cite: 2]
+      圖片生成提示詞: "A visual of a sequence of tags being checked by a filter or a rulebook for consistency."
+
+  - slide_5:
+      標題: CRF 的標籤約束能力
+      內容:
+        - [cite_start]舉例：如果前一個標籤是 O，CRF 會讓預測 I 的機率變得很低。 [cite: 2]
+        - 這解決了單純 Softmax 分類器容易產生非法序列的問題。
+      圖片生成提示詞: "An 'Invalid Sequence' warning sign over a path where 'O' leads directly to 'I'."
+
+  - slide_6:
+      標題: 深度學習時代：神經網路的加入
+      內容:
+        - 擺脫繁瑣的手工特徵工程。
+        - 自動學習文字的向量表示 (Embeddings)。
+        - 能夠捕捉複雜的語義特徵。
+      圖片生成提示詞: "A robotic hand replacing manual gears with a glowing neural network core."
+
+  - slide_7:
+      標題: 長短期記憶網路 (LSTM) 在 NER 的角色
+      內容:
+        - 擅長處理序列數據。
+        - 門控機制：解決梯度消失問題，記憶長距離資訊。
+      圖片生成提示詞: "A long train representing a sequence of words with specific cars (gates) storing information."
+
+  - slide_8:
+      標題: 雙向 LSTM (BiLSTM)：看前也看後
+      內容:
+        - [cite_start]前向 LSTM：獲取過去的上下文。 [cite: 2]
+        - [cite_start]後向 LSTM：獲取未來的上下文。 [cite: 2]
+        - [cite_start]結合兩者：對當前字有最全面的理解。 [cite: 2]
+      圖片生成提示詞: "A character standing between two mirrors, seeing both the words that came before and the words that follow."
+
+  - slide_9:
+      標題: 黃金拍檔：BiLSTM-CRF 架構
+      內容:
+        - [cite_start]BiLSTM 負責提取特徵 (Feature Extraction)。 [cite: 2]
+        - [cite_start]CRF 負責序列解碼與約束 (Sequence Decoding)。 [cite: 2]
+        - 這是 2015-2018 年間最主流的 NER 解決方案。
+      圖片生成提示詞: "A layered architecture diagram: Text Input -> BiLSTM Layer -> CRF Layer -> Label Output."
+
+  - slide_10:
+      標題: BiLSTM-CRF 的工作流程
+      內容:
+        1. 輸入文字轉為向量。
+        2. BiLSTM 產出每個標籤的得分。
+        3. CRF 綜合所有得分與轉移機率，找出最優路徑。
+      圖片生成提示詞: "A flow chart showing data moving from words through a neural processor to a sequence of tags."
+
+  - slide_11:
+      標題: 實戰策略：特徵增強 (Feature Engineering)
+      內容:
+        - 加入「字形特徵」：判斷是否為大寫、是否有數字、字首字尾。
+        - [cite_start]Character Embedding：解決 OOV (未登錄詞) 問題。 [cite: 2]
+      圖片生成提示詞: "A magnifying glass inspecting the individual strokes of a Chinese character to find visual patterns."
+
+  - slide_12:
+      標題: 轉折點：BERT 預訓練模型的降臨
+      內容:
+        - Transformer 結構取代了 RNN。
+        - 在海量文本上預訓練，具備極強的通用語言常識。
+        - [cite_start]NER 變成了一個簡單的微調 (Fine-tuning) 任務。 [cite: 2]
+      圖片生成提示詞: "A massive library being compressed into a single glowing brain icon labeled 'BERT'."
+
+  - slide_13:
+      標題: BERT-NER 模型架構
+      內容:
+        - 輸入：Token, Segment, Position Embeddings。
+        - 輸出：取每個 Token 的首位向量進行分類。
+        - 方案：BERT + Linear 或 BERT + CRF。
+      圖片生成提示詞: "An illustration of the BERT transformer blocks with a simple classification head on top."
+
+  - slide_14:
+      標題: 為什麼 BERT 效果這麼好？
+      內容:
+        - 自注意力機制 (Self-Attention)：直接計算字與字之間的關聯，無視距離。
+        - 動態詞向量：同一個字在不同句子中有不同的向量。
+      圖片生成提示詞: "A web of glowing lines connecting every word in a sentence to every other word."
+
+  - slide_15:
+      標題: 實戰案例：醫療領域 NER
+      內容:
+        - 挑戰：專有名詞多、數據稀少。
+        - 策略：使用 BioBERT 或在醫療語料上續訓練。
+      圖片生成提示詞: "A medical doctor looking at a digital tablet where disease names and drug names are highlighted."

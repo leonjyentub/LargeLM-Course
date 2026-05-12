@@ -1,0 +1,113 @@
+stage: "階段二：序列標註與資料格式"
+
+slides:
+
+  - id: 16
+    title: "Vocabulary"
+    content:
+      - "[PAD], [UNK]"
+      - "建立字/詞對應 ID"
+    image_prompt: "dictionary visualization"
+
+  - id: 17
+    title: "Label Encoding"
+    content:
+      - "標籤轉數字"
+      - "例如：O=0, B-PER=1"
+    image_prompt: "mapping diagram"
+
+  - id: 18
+    title: "找錯誤練習"
+    content:
+      - "O B-ORG I-ORG B-ORG I-ORG"
+      - "問題：不應該中斷"
+    image_prompt: "error detection"
+
+  - id: 19
+    title: "實作練習"
+    content:
+      - "台北市 → LOC"
+      - "台積電 → ORG"
+    image_prompt: "student annotation"
+
+  - id: 20
+    title: "資料不平衡"
+    content:
+      - "O 佔大多數"
+      - "模型偏向預測 O"
+      - "需用 F1-score"
+    image_prompt: "imbalanced dataset"
+
+  - id: 21
+    title: "標註工具"
+    content:
+      - "Doccano"
+      - "Label Studio"
+      - "BRAT"
+    image_prompt: "annotation tools UI"
+
+  - id: 22
+    title: "Nested NER"
+    content:
+      - "實體包含實體"
+      - "BIO 無法處理"
+      - "需新模型"
+    image_prompt: "nested entities"
+
+  - id: 23
+    title: "非連續實體"
+    content:
+      - "實體被分開"
+      - "傳統序列標註困難"
+    image_prompt: "discontinuous entity"
+
+  - id: 24
+    title: "Padding"
+    content:
+      - "統一長度"
+      - "使用 mask 忽略"
+    image_prompt: "padding diagram"
+
+  - id: 25
+    title: "輸入表示"
+    content:
+      - "Embedding + Positional Encoding"
+      - "可加入 char embedding"
+    image_prompt: "embedding layers"
+
+  - id: 26
+    title: "資料集"
+    content:
+      - "MSRA"
+      - "OntoNotes"
+      - "Resume NER"
+    image_prompt: "dataset icons"
+
+  - id: 27
+    title: "Precision / Recall"
+    content:
+      - "Precision：預測正確比例"
+      - "Recall：找回多少實體"
+    image_prompt: "target diagram"
+
+  - id: 28
+    title: "F1-score"
+    content:
+      - "P 與 R 的調和平均"
+      - "NER 使用 strict match"
+    image_prompt: "formula visualization"
+
+  - id: 29
+    title: "標註錯誤"
+    content:
+      - "標準不一致"
+      - "需 guideline"
+    image_prompt: "annotation disagreement"
+
+  - id: 30
+    title: "總結"
+    content:
+      - "掌握序列標註"
+      - "理解資料處理"
+      - "下一步：BiLSTM + CRF"
+    image_prompt: "learning roadmap"

@@ -1,0 +1,115 @@
+階段三: 技術演進與實戰策略
+
+slides:
+  - slide_16:
+      標題: 實戰案例：金融領域 NER
+      內容:
+        - 目標：識別公司名、股價、漲跌趨勢。
+        - 挑戰：實體名稱長度極長。
+      圖片生成提示詞: "A stock market chart with entity bubbles appearing over specific company mentions."
+
+  - slide_17:
+      標題: 模型微調 (Fine-tuning) 技巧
+      內容:
+        - 學習率 (Learning Rate) 的設定。
+        - 權重衰減與 Dropout 防止過擬合。
+        - 數據增強：同義詞替換、隨機掩碼。
+      圖片生成提示詞: "A person fine-tuning a complex machine using a small screwdriver, aiming for precision."
+
+  - slide_18:
+      標題: 損失函數 (Loss Function) 解析
+      內容:
+        - CRF Loss：包含狀態分數與轉移分數。
+        - 模型目標：最小化負對數似然 (Negative Log-Likelihood)。
+      圖片生成提示詞: "A mathematical graph showing a valley where the model is trying to find the lowest point."
+
+  - slide_19:
+      標題: 實驗評估：如何閱讀報告
+      內容:
+        - 比較基準 (Baselines)。
+        - 消融實驗 (Ablation Study)：拿掉 CRF 層會發生什麼事？
+      圖片生成提示詞: "A scientist comparing two different test tubes, one labeled 'With CRF' and one 'Without CRF'."
+
+  - slide_20:
+      標題: 常見錯誤分析 (Error Analysis)
+      內容:
+        - 邊界截斷：抓到「台積」，漏掉「電」。
+        - 實體混淆：把「中國人壽」誤認為人物名。
+      圖片生成提示詞: "A checklist of errors with icons showing mismatched highlight boxes."
+
+  - slide_21:
+      標題: 部署與推論效率
+      內容:
+        - BERT 太慢怎麼辦？
+        - 模型蒸餾 (Distillation)：大模型教小模型。
+        - 模型量化 (Quantization)：減少計算量。
+      圖片生成提示詞: "A large heavy robot pouring its knowledge into a smaller, faster agile robot."
+
+  - slide_22:
+      標題: NER 實戰工具鏈
+      內容:
+        - Hugging Face Transformers：快速調用預訓練模型。
+        - PyTorch / TensorFlow：底層實現。
+        - HanLP / Jieba：傳統工具與輕量級方案。
+      圖片生成提示詞: "A toolbox filled with modern AI company logos and open-source icons."
+
+  - slide_23:
+      標題: 實戰練習：使用 Hugging Face
+      內容:
+        - 加載 `BertForTokenClassification`。
+        - 下載預訓練權重。
+        - 幾行代碼完成預測。
+      圖片生成提示詞: "A laptop screen showing a clean, short Python code snippet for NER."
+
+  - slide_24:
+      標題: 資料隱私與 NER
+      內容:
+        - 去識別化 (De-identification)：使用 NER 遮蔽姓名、地址等個資。
+        - 是符合 GDPR 等法規的重要技術。
+      圖片生成提示詞: "A document where sensitive names are replaced with black bars by a digital scanner."
+
+  - slide_25:
+      標題: 未來趨勢：Few-shot 與 Zero-shot NER
+      內容:
+        - 如果只有 10 筆標註數據怎麼辦？
+        - 使用 Prompt Tuning 進行實體識別。
+      圖片生成提示詞: "A small seedling growing in a dark room with just a single drop of water representing 'limited data'."
+
+  - slide_26:
+      標題: 未來趨勢：大語言模型 (LLM) 與 NER
+      內容:
+        - ChatGPT 能做 NER 嗎？
+        - 優點：不需訓練，只需指令。
+        - 缺點：速度慢、成本高、格式可能不穩。
+      圖片生成提示詞: "A futuristic AI interface responding to the prompt: 'Extract entities from this text'."
+
+  - slide_27:
+      標題: 總結：NER 的三個層次
+      內容:
+        1. [cite_start]標註 (BIO/BIOES) 是靈魂。 [cite: 1]
+        2. [cite_start]特徵 (BiLSTM/BERT) 是心臟。 [cite: 2]
+        3. [cite_start]約束 (CRF) 是大腦。 [cite: 2]
+      圖片生成提示詞: "An infographic of a robot showing the Soul, Heart, and Brain as labeling, features, and constraints."
+
+  - slide_28:
+      標題: 課程總複習
+      內容:
+        - [cite_start]什麼是實體？常見分類有哪些？ [cite: 1]
+        - [cite_start]為什麼要用 BIO 格式？ [cite: 1]
+        - [cite_start]從 HMM 到 BERT 的進化路徑。 [cite: 2]
+      圖片生成提示詞: "A mountain climber looking back at the path they climbed, with flags representing key milestones."
+
+  - slide_29:
+      標題: 延伸資源與閱讀
+      內容:
+        - 經典論文推薦。
+        - GitHub 熱門 NER 項目。
+        - 線上標註平台試用。
+      圖片生成提示詞: "A digital library shelf with glowing books and QR codes for further learning."
+
+  - slide_30:
+      標題: Q&A 問答時間
+      內容:
+        - 歡迎提問！
+        - 聯繫方式與後續課程預告。
+      圖片生成提示詞: "A friendly speech bubble icon with a question mark in the center of a clean background."
