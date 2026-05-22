@@ -2,3 +2,4 @@
 .pixi/*
 !.pixi/config.toml
 slides/.DS_Store
+.DS_Store

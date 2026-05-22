@@ -1,4 +1,7 @@
 {
     "python-envs.defaultEnvManager": "renan-r-santos.pixi-code:pixi",
-    "python-envs.defaultPackageManager": "renan-r-santos.pixi-code:pixi"
+    "python-envs.defaultPackageManager": "renan-r-santos.pixi-code:pixi",
+    "markdown.marp.themes": [
+        "RAG_tutorial/themes/rose-pine-dawn.css"
+    ]
 }
